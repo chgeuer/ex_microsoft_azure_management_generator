@@ -1,0 +1,13 @@
+{
+    "baseUrl": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs", "branch": "master",
+    "apis": [
+        { "package": "Microsoft.Azure.Management", "name": "Microsoft.Azure.Management.Resources", "url": "resources/resource-manager/Microsoft.Resources/stable/2018-02-01/resources.json", "state": "stable", "apiVersion": "2018-02-01" },
+        { "package": "Microsoft.Azure.Management", "name": "Microsoft.Azure.Management.Subscriptions", "url": "subscription/resource-manager/Microsoft.Subscription/stable/2016-06-01/subscriptions.json", "state": "stable", "apiVersion": "2016-06-01" },
+        { "package": "Microsoft.Azure.Management", "name": "Microsoft.Azure.Management.Authorization", "url": "resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json", "state": "stable", "apiVersion": "2016-12-01" },
+        { "package": "Microsoft.Azure.Management", "name": "Microsoft.Azure.Management.Authorization", "url": "resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json", "state": "stable", "apiVersion": "2016-12-01" },
+        { "package": "Microsoft.Azure.Management", "name": "Microsoft.Azure.Management.Compute", "url": "compute/resource-manager/Microsoft.Compute/stable/2018-04-01/disk.json", "state": "stable", "apiVersion": "2018-04-01" },
+        { "package": "Microsoft.Azure.Management", "name": "Microsoft.Azure.Management.Compute", "url": "compute/resource-manager/Microsoft.Compute/stable/2017-12-01/compute.json", "state": "stable", "apiVersion": "2017-12-01" },
+        { "package": "Microsoft.Azure.Management", "name": "Microsoft.Azure.Management.Compute", "url": "compute/resource-manager/Microsoft.Compute/stable/2017-09-01/skus.json", "state": "stable", "apiVersion": "2017-09-01" },
+        { "package": "Microsoft.Azure.Management", "name": "Microsoft.Azure.Management.CDN", "url": "cdn/resource-manager/Microsoft.Cdn/stable/2017-10-12/cdn.json", "state": "stable", "apiVersion": "2017-10-12" }
+    ]
+}
