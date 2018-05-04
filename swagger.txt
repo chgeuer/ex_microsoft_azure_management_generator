@@ -31,7 +31,5 @@ resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssig
 resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json
 resources/resource-manager/Microsoft.Features/stable/2015-12-01/features.json
 resources/resource-manager/Microsoft.Resources/stable/2018-02-01/resources.json
-subscription/resource-manager/Microsoft.Subscription/preview/2017-11-01-preview/subscriptionDefinitions.json
-subscription/resource-manager/Microsoft.Subscription/preview/2018-03-01-preview/subscriptions.json
 postgresql/resource-manager/Microsoft.DBforPostgreSQL/stable/2017-12-01/postgresql.json
 mysql/resource-manager/Microsoft.DBforMySQL/stable/2017-12-01/mysql.json
