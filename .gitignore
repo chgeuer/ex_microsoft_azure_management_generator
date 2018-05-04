@@ -24,3 +24,4 @@ ex_microsoft_azure_management_generator-*.tar
 
 /clients
 /*.jar
+/.elixir_ls

@@ -2,7 +2,7 @@ defmodule ExMicrosoftAzureManagementGenerator do
   alias __MODULE__.Config
   alias __MODULE__.API
 
-  @java "java.exe"
+  @java "java"
   @jar Application.get_env(:ex_microsoft_azure_management_generator, :jar_version)
   @jar_source Application.get_env(:ex_microsoft_azure_management_generator, :jar_source)
               |> String.to_charlist()
@@ -23,37 +23,26 @@ defmodule ExMicrosoftAzureManagementGenerator do
   end
 
   def generate([]), do: :ok
-
   def generate([api = %API{} | tail]) do
-    generatorConfig =
-      %{packageName: "azure", invokerPackage: "#{api.name}"}
-      |> Poison.encode!(pretty: true)
-
     IO.puts("Writing package=#{api.package} name=#{api.name}")
 
-    File.write!("#{api.name}.json", generatorConfig)
+    generatorConfig =
+      %{packageName: "microsoft_azure_management", invokerPackage: "#{api.name}"}
+      |> Poison.encode!(pretty: true)
 
-    {_stdout, 0} =
-      System.cmd(
-        @java,
-        [
-          "-jar",
-          "#{@jar}",
-          "generate",
-          "-l",
-          "elixir",
-          "-i",
-          "#{api.url}",
-          "-o",
-          "clients/#{api.package}",
-          "-c",
-          Path.absname("#{api.name}.json")
-        ],
+    configFileName = "#{api.name}.json"
+    configFileName |> File.write!(generatorConfig)
+
+    args = "-jar #{@jar} generate -l elixir -i #{api.url} -o clients/#{api.package} -c #{configFileName}"
+    IO.puts("Running #{@java} #{args}")
+
+    {_stdout, 0} = System.cmd(@java,
+        args |> String.split(" "),
         stderr_to_stdout: true,
         cd: Path.absname(".")
       )
 
-    File.rm!("#{api.name}.json")
+    # configFileName |> File.rm!()
 
     generate(tail)
   end
@@ -79,23 +68,14 @@ defmodule ExMicrosoftAzureManagementGenerator do
     |> String.replace("PowerBIdedicated", "PowerBiDedicated")
   end
 
-  defp to_api(l = [pref, "resource-management", api_version, file]),
+  defp to_api(l = [_pref, "resource-management", api_version, _file]),
     do: %API{
       package: "Microsoft.Azure.Management",
       url: @url_pref <> Enum.join(l, "/"),
       apiVersion: api_version
     }
 
-  defp to_api(l = [pref, "resource-manager", name, state, api_version, file]),
-    do: %API{
-      package: "Microsoft.Azure.Management",
-      name: name |> tweak_name(),
-      url: @url_pref <> Enum.join(l, "/"),
-      state: state,
-      apiVersion: api_version
-    }
-
-  defp to_api(l = [pref, "resource-manager", name, state, api_version, area, file]),
+  defp to_api(l = [_pref, "resource-manager", name, state, api_version, _file]),
     do: %API{
       package: "Microsoft.Azure.Management",
       name: name |> tweak_name(),
@@ -104,12 +84,21 @@ defmodule ExMicrosoftAzureManagementGenerator do
       apiVersion: api_version
     }
 
-  defp to_api(l = ["azsadmin", "resource-manager", area, name, state, api_version, file]), do: nil
-  defp to_api(l = [pref, "control-plane", name, state, api_version, file]), do: nil
-  defp to_api(l = [pref, "data-plane", name, area, state, api_version, file]), do: nil
-  defp to_api(l = [pref, "data-plane", name, state, api_version, file]), do: nil
-  defp to_api(l = [pref, "data-plane", name, api_version, file]), do: nil
-  defp to_api(l = [pref, "data-plane", name, file]), do: nil
+  defp to_api(l = [_pref, "resource-manager", name, state, api_version, _area, _file]),
+    do: %API{
+      package: "Microsoft.Azure.Management",
+      name: name |> tweak_name(),
+      url: @url_pref <> Enum.join(l, "/"),
+      state: state,
+      apiVersion: api_version
+    }
+
+  defp to_api(["azsadmin", "resource-manager", _area, _name, _state, _api_version, _file]), do: nil
+  defp to_api([_pref, "control-plane", _name, _state, _api_version, _file]), do: nil
+  defp to_api([_pref, "data-plane", _name, _area, _state, _api_version, _file]), do: nil
+  defp to_api([_pref, "data-plane", _name, _state, _api_version, _file]), do: nil
+  defp to_api([_pref, "data-plane", _name, _api_version, _file]), do: nil
+  defp to_api([_pref, "data-plane", _name, _file]), do: nil
 
   defp parse_url(line) do
     line
@@ -125,6 +114,9 @@ defmodule ExMicrosoftAzureManagementGenerator do
     |> Stream.filter(&(&1 != nil))
     |> Enum.map(& &1)
     |> generate()
+
+    IO.puts("Fixing body handling (https://github.com/swagger-api/swagger-codegen/issues/8138)")
+    System.cmd("fix_body.sh", [], stderr_to_stdout: true, cd: Path.absname("clients"))
   end
 
   def generate_from_text_file(), do: "swagger.txt" |> Path.absname() |> generate_from_text_file()
