@@ -7,3 +7,9 @@ find clients \
    -name "*.ex" \
    -exec sed -i'' \
     -e 's/add_param(:body, :"parameters", parameters)/add_param(:body, :body, parameters)/g' {} +
+
+find clients \
+   -type f \
+   -name "*.ex" \
+   -exec sed -i'' \
+    -e 's/add_param(:body, :"createUpdateParameters", create_update_parameters)/add_param(:body, :body, create_update_parameters)/g' {} +
