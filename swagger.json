@@ -26,6 +26,13 @@
         "package": "Microsoft.Azure.Management.Network", 
         "name": "Microsoft.Azure.Management.Network", 
         "url": [ 
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-04-01/network.json",
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-04-01/networkInterface.json",
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-04-01/virtualNetwork.json",
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-04-01/networkSecurityGroup.json",
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-04-01/publicIpAddress.json",
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-04-01/loadBalancer.json",
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-04-01/routeTable.json",
             "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-04-01/applicationGateway.json",
             "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-04-01/applicationSecurityGroup.json",
             "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-04-01/checkDnsAvailability.json",
@@ -33,18 +40,11 @@
             "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-04-01/endpointService.json",
             "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-04-01/expressRouteCircuit.json",
             "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-04-01/expressRouteCrossConnection.json",
-            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-04-01/loadBalancer.json",
-            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-04-01/network.json",
-            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-04-01/networkInterface.json",
-            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-04-01/networkSecurityGroup.json",
             "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-04-01/networkWatcher.json",
             "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-04-01/operation.json",
-            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-04-01/publicIpAddress.json",
             "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-04-01/routeFilter.json",
-            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-04-01/routeTable.json",
             "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-04-01/serviceCommunity.json",
             "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-04-01/usage.json",
-            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-04-01/virtualNetwork.json",
             "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-04-01/virtualNetworkGateway.json",
             "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-04-01/vmssNetworkInterface.json",
             "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-04-01/vmssPublicIpAddress.json"
@@ -88,6 +88,30 @@
         "name": "Microsoft.Azure.Management.Database.MySql", 
         "url": [ 
             "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/mysql/resource-manager/Microsoft.DBforMySQL/stable/2017-12-01/mysql.json"
+         ]
+    },
+    { 
+        "app_name": "ex_microsoft_azure_management_cosmosdb",
+        "package": "Microsoft.Azure.Management.Database.CosmosDb", 
+        "name": "Microsoft.Azure.Management.Database.CosmosDb", 
+        "url": [ 
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/stable/2015-04-08/cosmos-db.json"
+         ]
+    },
+    { 
+        "app_name": "ex_microsoft_azure_management_eventhub",
+        "package": "Microsoft.Azure.Management.EventHub", 
+        "name": "Microsoft.Azure.Management.EventHub", 
+        "url": [ 
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/eventhub/resource-manager/Microsoft.EventHub/stable/2017-04-01/EventHub.json"
+         ]
+    },
+    { 
+        "app_name": "ex_microsoft_azure_management_preview_eventhub",
+        "package": "Microsoft.Azure.Management.Preview.EventHub", 
+        "name": "Microsoft.Azure.Management.Preview.EventHub", 
+        "url": [ 
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/eventhub/resource-manager/Microsoft.EventHub/preview/2018-01-01-preview/EventHubCluster.json"
          ]
     }
 ]
