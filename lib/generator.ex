@@ -8,35 +8,25 @@ defmodule Generator do
   @jar_source "http://central.maven.org/maven2/io/swagger/swagger-codegen-cli/#{@codegen_version}/swagger-codegen-cli-#{@codegen_version}.jar"
   @apiConfigFile "swagger.json"
 
-  def generate() do
+  def generate(configFile \\ @apiConfigFile) do
     init()
 
-    @apiConfigFile
+    configFile
     |> File.read!()
     |> Poison.decode!(as: [%API{}])
     |> Enum.each(&gen_api_collection/1)
 
     # https://github.com/swagger-api/swagger-codegen/issues/8138
-    System.cmd("sh", ["fix_body.sh"], stderr_to_stdout: true, cd: Path.absname("clients"))
-  end
-
-  defp init() do
-    unless @jar |> File.exists?() do
-      # Application.ensure_all_started(:inets)
-      IO.puts("Downloading #{@jar_source}")
-
-      {:ok, {{_, 200, 'OK'}, _headers, body}} =
-        :httpc.request(:get, {@jar_source |> String.to_charlist(), []}, [], body_format: :binary)
-
-      @jar |> File.write!(body)
-    end
+    System.cmd("/bin/sh", ["fix_body.sh"],
+      stderr_to_stdout: true,
+      cd: Path.absname("clients"))
   end
 
   defp gen_api_collection(api = %API{}) do
     api.url
     |> Enum.each(
       &(Map.put(api, :url, &1)
-        |> generate())
+        |> generate_impl())
     )
   end
 
@@ -48,7 +38,7 @@ defmodule Generator do
     configFileName |> File.write!(generatorConfig)
   end
 
-  defp generate(api = %API{}) do
+  defp generate_impl(api = %API{}) do
     api.url
     |> String.replace_leading(
       "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/",
@@ -72,5 +62,17 @@ defmodule Generator do
       )
 
     configFileName |> File.rm!()
+  end
+
+  defp init() do
+    unless @jar |> File.exists?() do
+      # Application.ensure_all_started(:inets)
+      IO.puts("Downloading #{@jar_source}")
+
+      {:ok, {{_, 200, 'OK'}, _headers, body}} =
+        :httpc.request(:get, {@jar_source |> String.to_charlist(), []}, [], body_format: :binary)
+
+      @jar |> File.write!(body)
+    end
   end
 end

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 echo "Fixing body handling (https://github.com/swagger-api/swagger-codegen/issues/8138)"
 

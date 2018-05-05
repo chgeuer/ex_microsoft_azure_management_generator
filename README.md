@@ -1,21 +1,46 @@
 # ExMicrosoftAzureManagementGenerator
 
-**TODO: Add description**
+Generates Elixir SDKs from Microsoft Azure Swagger specifications. 
 
-## Installation
+## Dependencies
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `ex_microsoft_azure_management_generator` to your list of dependencies in `mix.exs`:
+- Java
+- `bash` and `find`
 
-```elixir
-def deps do
-  [
-    {:ex_microsoft_azure_management_generator, "~> 0.1.0"}
-  ]
-end
+## How to run
+
+```bash
+mix deps.get
+./generate.sh
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/ex_microsoft_azure_management_generator](https://hexdocs.pm/ex_microsoft_azure_management_generator).
+## Configuration
 
+The example configuration in `swagger.json` below generates two SDKs, one for the Azure Compute provider, and one for the PostgreSQL managed database. 
+
+The compute SDK joins multiple Swagger definitions (`skus`, `compute`, `runCommands` and `disk`) in a single Elixir SDK. 
+
+```json
+[
+    { 
+        "app_name": "ex_microsoft_azure_management_compute",
+        "package": "Microsoft.Azure.Management.Compute", 
+        "name": "Microsoft.Azure.Management.Compute", 
+        "url": [
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/compute/resource-manager/Microsoft.Compute/stable/2017-09-01/skus.json",
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/compute/resource-manager/Microsoft.Compute/stable/2017-12-01/compute.json",
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/compute/resource-manager/Microsoft.Compute/stable/2017-12-01/runCommands.json",
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/compute/resource-manager/Microsoft.Compute/stable/2018-04-01/disk.json"
+         ]
+    },
+    { 
+        "app_name": "ex_microsoft_azure_management_postgresql",
+        "package": "Microsoft.Azure.Management.Database.PostgreSql", 
+        "name": "Microsoft.Azure.Management.Database.PostgreSql", 
+        "url": [ 
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/postgresql/resource-manager/Microsoft.DBforPostgreSQL/stable/2017-12-01/postgresql.json"
+         ]
+    },
+    ...
+]
+```
