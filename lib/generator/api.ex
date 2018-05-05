@@ -1,4 +1,4 @@
-defmodule ExMicrosoftAzureManagementGenerator.API do
+defmodule Generator.API do
   defstruct [:package, :name, :url, :state, :apiVersion]
 
   def expand_api(api = %__MODULE__{}, baseUrl, branch),

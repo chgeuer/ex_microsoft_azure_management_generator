@@ -1,4 +1,4 @@
-defmodule ExMicrosoftAzureManagementGenerator do
+defmodule Generator do
   alias __MODULE__.Config
   alias __MODULE__.API
 

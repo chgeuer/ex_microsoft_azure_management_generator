@@ -1,6 +1,6 @@
-defmodule ExMicrosoftAzureManagementGenerator.Config do
+defmodule Generator.Config do
   alias __MODULE__
-  alias ExMicrosoftAzureManagementGenerator.API
+  alias Generator.API
 
   defstruct [:baseUrl, :branch, :apis]
 
