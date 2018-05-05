@@ -1,6 +1,6 @@
 #!/bin/bash
 
-find . \
+find clients \
    -type f \
    -name "*.ex" \
    -exec sed -i'' \
