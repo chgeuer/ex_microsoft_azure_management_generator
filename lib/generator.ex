@@ -1,14 +1,25 @@
 defmodule Generator do
-  alias __MODULE__.Config
-  alias __MODULE__.API
+  defmodule API do
+    defstruct [:app_name, :package, :name, :url]
+  end
 
   @java "java"
-  @jar Application.get_env(:ex_microsoft_azure_management_generator, :jar_version)
-  @jar_source Application.get_env(:ex_microsoft_azure_management_generator, :jar_source) |> String.to_charlist()
+  @codegen_version "2.3.1"
+  @jar "swagger-codegen-cli-#{@codegen_version}.jar"
+  @jar_source "http://central.maven.org/maven2/io/swagger/swagger-codegen-cli/#{@codegen_version}/swagger-codegen-cli-#{@codegen_version}.jar"
+  @apiConfigFile "swagger.json"
 
-  # @baseUrl "https://raw.githubusercontent.com/Azure/azure-rest-api-specs"
-  # @branch "master"
-  # @url_pref @baseUrl <> "/" <> @branch <> "/specification/"
+  def generate() do
+    init()
+
+    @apiConfigFile
+    |> File.read!()
+    |> Poison.decode!(as: [%API{}])
+    |> Enum.each(&gen_api_collection/1)
+
+    # https://github.com/swagger-api/swagger-codegen/issues/8138
+    System.cmd("sh", ["fix_body.sh"], stderr_to_stdout: true, cd: Path.absname("clients"))
+  end
 
   defp init() do
     unless @jar |> File.exists?() do
@@ -21,42 +32,40 @@ defmodule Generator do
     end
   end
 
-  defp generate(url, app_name, package, name) do
-    init()
+  defp gen_api_collection(api = %API{}) do
+    api.url
+    |> Enum.each(
+      &(Map.put(api, :url, &1)
+        |> generate())
+    )
+  end
 
-    IO.puts("app_name=#{app_name} package=#{package} name=#{name} url=#{url}")
-
+  defp write_local_config_file(configFileName, app_name, name) do
     generatorConfig =
       %{packageName: app_name, invokerPackage: "#{name}"}
       |> Poison.encode!(pretty: true)
 
-    configFileName = "#{name}.json"
     configFileName |> File.write!(generatorConfig)
+  end
 
-    args = "-jar #{@jar} generate -l elixir " <>
-      "-i #{url} -o clients/#{package} -c #{configFileName}"
+  defp generate(api = %API{}) do
+    IO.puts("app_name=#{api.app_name} package=#{api.package} name=#{api.name} url=#{api.url}")
+
+    configFileName = "#{api.name}.json"
+    configFileName |> write_local_config_file(api.app_name, api.name)
+
+    args = "-jar #{@jar} generate -l elixir -i #{api.url} -o clients/#{api.package} -c #{configFileName}"
 
     IO.puts("Running #{@java} #{args}")
 
-    {_stdout, 0} = System.cmd(@java,
+    {_stdout, 0} =
+      System.cmd(
+        @java,
         args |> String.split(" "),
         stderr_to_stdout: true,
         cd: Path.absname(".")
       )
 
     configFileName |> File.rm!()
-  end
-
-  defp gen_api_collection(%API{app_name: app_name, package: package, name: name, url: urls}), do:
-    urls |> Enum.each(&(&1 |> generate(app_name, package, name)))
-
-  def generate() do
-    "swagger.json"
-    |> File.read!()
-    |> Config.parse()
-    |> Enum.each(&gen_api_collection/1)
-
-    # Fixing body handling (https://github.com/swagger-api/swagger-codegen/issues/8138)
-    System.cmd("sh", ["fix_body.sh"], stderr_to_stdout: true, cd: Path.absname("clients"))
   end
 end
