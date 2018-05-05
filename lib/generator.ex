@@ -49,14 +49,13 @@ defmodule Generator do
   end
 
   defp generate(api = %API{}) do
-    IO.puts("app_name=#{api.app_name} package=#{api.package} name=#{api.name} url=#{api.url}")
+    api.url
+    |> String.replace_leading("https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification", "")
+    |> IO.puts()
 
     configFileName = "#{api.name}.json"
     configFileName |> write_local_config_file(api.app_name, api.name)
-
     args = "-jar #{@jar} generate -l elixir -i #{api.url} -o clients/#{api.package} -c #{configFileName}"
-
-    IO.puts("Running #{@java} #{args}")
 
     {_stdout, 0} =
       System.cmd(
