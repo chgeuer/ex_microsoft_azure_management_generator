@@ -2,7 +2,7 @@
 
 echo "Fixing body handling (https://github.com/swagger-api/swagger-codegen/issues/8138)"
 
-find . \
+find clients \
    -type f \
    -name "*.ex" \
    -exec sed -i'' \
