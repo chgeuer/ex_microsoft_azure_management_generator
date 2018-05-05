@@ -1,13 +1,93 @@
-{
-    "baseUrl": "https://raw.githubusercontent.com/Azure/azure-rest-api-specs", "branch": "master",
-    "apis": [
-        { "package": "Microsoft.Azure.Management", "name": "Microsoft.Azure.Management.Resources", "url": "resources/resource-manager/Microsoft.Resources/stable/2018-02-01/resources.json", "state": "stable", "apiVersion": "2018-02-01" },
-        { "package": "Microsoft.Azure.Management", "name": "Microsoft.Azure.Management.Subscriptions", "url": "subscription/resource-manager/Microsoft.Subscription/stable/2016-06-01/subscriptions.json", "state": "stable", "apiVersion": "2016-06-01" },
-        { "package": "Microsoft.Azure.Management", "name": "Microsoft.Azure.Management.Authorization", "url": "resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json", "state": "stable", "apiVersion": "2016-12-01" },
-        { "package": "Microsoft.Azure.Management", "name": "Microsoft.Azure.Management.Authorization", "url": "resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json", "state": "stable", "apiVersion": "2016-12-01" },
-        { "package": "Microsoft.Azure.Management", "name": "Microsoft.Azure.Management.Compute", "url": "compute/resource-manager/Microsoft.Compute/stable/2018-04-01/disk.json", "state": "stable", "apiVersion": "2018-04-01" },
-        { "package": "Microsoft.Azure.Management", "name": "Microsoft.Azure.Management.Compute", "url": "compute/resource-manager/Microsoft.Compute/stable/2017-12-01/compute.json", "state": "stable", "apiVersion": "2017-12-01" },
-        { "package": "Microsoft.Azure.Management", "name": "Microsoft.Azure.Management.Compute", "url": "compute/resource-manager/Microsoft.Compute/stable/2017-09-01/skus.json", "state": "stable", "apiVersion": "2017-09-01" },
-        { "package": "Microsoft.Azure.Management", "name": "Microsoft.Azure.Management.CDN", "url": "cdn/resource-manager/Microsoft.Cdn/stable/2017-10-12/cdn.json", "state": "stable", "apiVersion": "2017-10-12" }
-    ]
-}
+[
+    { 
+        "app_name": "ex_microsoft_azure_management_authorization",
+        "package": "Microsoft.Azure.Management.Authorization", 
+        "name": "Microsoft.Azure.Management.Authorization", 
+        "url": [ 
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/authorization/resource-manager/Microsoft.Authorization/stable/2015-07-01/authorization.json",
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-09-01/locks.json",
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json",
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json"
+         ]
+    },
+    { 
+        "app_name": "ex_microsoft_azure_management_compute",
+        "package": "Microsoft.Azure.Management.Compute", 
+        "name": "Microsoft.Azure.Management.Compute", 
+        "url": [
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/compute/resource-manager/Microsoft.Compute/stable/2017-09-01/skus.json",
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/compute/resource-manager/Microsoft.Compute/stable/2017-12-01/compute.json",
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/compute/resource-manager/Microsoft.Compute/stable/2017-12-01/runCommands.json",
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/compute/resource-manager/Microsoft.Compute/stable/2018-04-01/disk.json"
+         ]
+    },
+    { 
+        "app_name": "ex_microsoft_azure_management_network",
+        "package": "Microsoft.Azure.Management.Network", 
+        "name": "Microsoft.Azure.Management.Network", 
+        "url": [ 
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-04-01/applicationGateway.json",
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-04-01/applicationSecurityGroup.json",
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-04-01/checkDnsAvailability.json",
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-04-01/ddosProtectionPlan.json",
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-04-01/endpointService.json",
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-04-01/expressRouteCircuit.json",
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-04-01/expressRouteCrossConnection.json",
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-04-01/loadBalancer.json",
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-04-01/network.json",
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-04-01/networkInterface.json",
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-04-01/networkSecurityGroup.json",
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-04-01/networkWatcher.json",
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-04-01/operation.json",
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-04-01/publicIpAddress.json",
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-04-01/routeFilter.json",
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-04-01/routeTable.json",
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-04-01/serviceCommunity.json",
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-04-01/usage.json",
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-04-01/virtualNetwork.json",
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-04-01/virtualNetworkGateway.json",
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-04-01/vmssNetworkInterface.json",
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-04-01/vmssPublicIpAddress.json"
+         ]
+    },
+    { 
+        "app_name": "ex_microsoft_azure_management_managedServiceIdentity",
+        "package": "Microsoft.Azure.Management.ManagedServiceIdentity", 
+        "name": "Microsoft.Azure.Management.ManagedServiceIdentity", 
+        "url": [ 
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/msi/resource-manager/Microsoft.ManagedIdentity/preview/2015-08-31-preview/ManagedIdentity.json"
+         ]
+    },
+    { 
+        "app_name": "ex_microsoft_azure_management_features",
+        "package": "Microsoft.Azure.Management.Features", 
+        "name": "Microsoft.Azure.Management.Features", 
+        "url": [ 
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/resources/resource-manager/Microsoft.Features/stable/2015-12-01/features.json"
+         ]
+    },
+    { 
+        "app_name": "ex_microsoft_azure_management_resources",
+        "package": "Microsoft.Azure.Management.Resources", 
+        "name": "Microsoft.Azure.Management.Resources", 
+        "url": [ 
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/resources/resource-manager/Microsoft.Resources/stable/2018-02-01/resources.json"
+         ]
+    },
+    { 
+        "app_name": "ex_microsoft_azure_management_postgresql",
+        "package": "Microsoft.Azure.Management.Database.PostgreSql", 
+        "name": "Microsoft.Azure.Management.Database.PostgreSql", 
+        "url": [ 
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/postgresql/resource-manager/Microsoft.DBforPostgreSQL/stable/2017-12-01/postgresql.json"
+         ]
+    },
+    { 
+        "app_name": "ex_microsoft_azure_management_mysql",
+        "package": "Microsoft.Azure.Management.Database.MySql", 
+        "name": "Microsoft.Azure.Management.Database.MySql", 
+        "url": [ 
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/mysql/resource-manager/Microsoft.DBforMySQL/stable/2017-12-01/mysql.json"
+         ]
+    }
+]
