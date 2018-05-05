@@ -19,7 +19,6 @@ defmodule ExMicrosoftAzureManagementGenerator.MixProject do
 
   defp deps do
     [
-      {:tesla, "~> 0.8"},
       {:poison, ">= 1.0.0"}
     ]
   end
