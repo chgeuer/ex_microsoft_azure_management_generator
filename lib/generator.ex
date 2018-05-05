@@ -3,7 +3,6 @@ defmodule Generator do
     defstruct [:app_name, :package, :name, :url]
   end
 
-  @java "java"
   @codegen_version "2.3.1"
   @jar "swagger-codegen-cli-#{@codegen_version}.jar"
   @jar_source "http://central.maven.org/maven2/io/swagger/swagger-codegen-cli/#{@codegen_version}/swagger-codegen-cli-#{@codegen_version}.jar"
@@ -23,10 +22,11 @@ defmodule Generator do
 
   defp init() do
     unless @jar |> File.exists?() do
-      Application.ensure_all_started(:inets)
+      # Application.ensure_all_started(:inets)
+      IO.puts("Downloading #{@jar_source}")
 
-      {:ok, resp} = :httpc.request(:get, {@jar_source, []}, [], body_format: :binary)
-      {{_, 200, 'OK'}, _headers, body} = resp
+      {:ok, {{_, 200, 'OK'}, _headers, body}} =
+        :httpc.request(:get, {@jar_source |> String.to_charlist(), []}, [], body_format: :binary)
 
       @jar |> File.write!(body)
     end
@@ -50,16 +50,22 @@ defmodule Generator do
 
   defp generate(api = %API{}) do
     api.url
-    |> String.replace_leading("https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification", "")
+    |> String.replace_leading(
+      "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/",
+      ""
+    )
     |> IO.puts()
 
     configFileName = "#{api.name}.json"
     configFileName |> write_local_config_file(api.app_name, api.name)
-    args = "-jar #{@jar} generate -l elixir -i #{api.url} -o clients/#{api.package} -c #{configFileName}"
+
+    args =
+      "-jar #{@jar} generate -l elixir " <>
+        "-i #{api.url} " <> "-o clients/#{api.package} " <> "-c #{configFileName}"
 
     {_stdout, 0} =
       System.cmd(
-        @java,
+        "java",
         args |> String.split(" "),
         stderr_to_stdout: true,
         cd: Path.absname(".")
