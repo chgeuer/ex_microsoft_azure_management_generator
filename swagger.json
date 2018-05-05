@@ -99,6 +99,22 @@
          ]
     },
     { 
+        "app_name": "ex_microsoft_azure_management_subscription",
+        "package": "Microsoft.Azure.Management.Subscription", 
+        "name": "Microsoft.Azure.Management.Subscription", 
+        "url": [ 
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/subscription/resource-manager/Microsoft.Subscription/stable/2016-06-01/subscriptions.json"
+         ]
+    },
+    { 
+        "app_name": "ex_microsoft_azure_management_preview_subscription",
+        "package": "Microsoft.Azure.Management.Preview.Subscription", 
+        "name": "Microsoft.Azure.Management.Preview.Subscription", 
+        "url": [ 
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/subscription/resource-manager/Microsoft.Subscription/preview/2018-03-01-preview/subscriptions.json"
+         ]
+    },
+    { 
         "app_name": "ex_microsoft_azure_management_eventhub",
         "package": "Microsoft.Azure.Management.EventHub", 
         "name": "Microsoft.Azure.Management.EventHub", 
