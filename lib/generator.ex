@@ -6,6 +6,7 @@ defmodule Generator do
   @codegen_version "2.3.1"
   @jar "swagger-codegen-cli-#{@codegen_version}.jar"
   @jar_source "http://central.maven.org/maven2/io/swagger/swagger-codegen-cli/#{@codegen_version}/swagger-codegen-cli-#{@codegen_version}.jar"
+  @target "clients"
 
   def generate(configFile \\ "swagger.json") do
     init()
@@ -14,8 +15,6 @@ defmodule Generator do
     |> File.read!()
     |> Poison.decode!(as: [%API{}])
     |> Enum.each(&gen_api_collection/1)
-
-    fix_swagger_problem()
   end
 
   defp gen_api_collection(api = %API{}) do
@@ -47,7 +46,7 @@ defmodule Generator do
 
     args =
       "-jar #{@jar} generate -l elixir " <>
-        "-i #{api.url} -o clients/#{api.package} -c #{configFileName}"
+        "-i #{api.url} -o #{@target}/#{api.package} -c #{configFileName}"
 
     {_stdout, 0} =
       System.cmd(
@@ -57,13 +56,10 @@ defmodule Generator do
         cd: Path.absname(".")
       )
 
+    "#{@target}/#{api.package}"
+    |> fix_swagger_problem()
+
     configFileName |> File.rm!()
-  end
-
-  defp fix_swagger_problem() do
-    # https://github.com/swagger-api/swagger-codegen/issues/8138
-
-    {_stdout, 0} = System.cmd("/bin/sh", ["fix_body.sh"], stderr_to_stdout: true)
   end
 
   defp init() do
@@ -75,5 +71,24 @@ defmodule Generator do
 
       @jar |> File.write!(body)
     end
+  end
+
+  defp fix_swagger_problem(target) do
+    # https://github.com/swagger-api/swagger-codegen/issues/8138
+    # /usr/bin/find clients -type f -name "*.ex" -exec sed -i'' -e 's/add_param(:body, :"[^"]*", /add_param(:body, :body, /g' {} +
+
+    fix = fn body ->
+      Regex.replace(
+        ~r/\|> add_param\(:body, :"[^"]+", /,
+        body,
+        "|> add_param(:body, :body, ",
+        global: true
+      )
+    end
+
+    "#{target}/**/api/*.ex"
+    |> Path.wildcard()
+    |> Enum.map(&%{name: &1, content: &1 |> File.read!() |> fix.()})
+    |> Enum.each(&File.write!(&1.name, &1.content))
   end
 end

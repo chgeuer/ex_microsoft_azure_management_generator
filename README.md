@@ -5,7 +5,6 @@ Generates Elixir SDKs from Microsoft Azure Swagger specifications.
 ## Dependencies
 
 - Java
-- `bash` and `find`
 
 ## How to run
 
