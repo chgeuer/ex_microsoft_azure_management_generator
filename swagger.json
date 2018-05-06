@@ -1,5 +1,44 @@
 [
     { 
+        "app_name": "ex_microsoft_azure_management_preview_addons",
+        "package": "Microsoft.Azure.Management.Preview.Addons", 
+        "name": "Microsoft.Azure.Management.Preview.Addons", 
+        "url": [ 
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/addons/resource-manager/Microsoft.Addons/preview/2018-03-01/addons-swagger.json"
+         ]
+    },
+    { 
+        "app_name": "ex_microsoft_azure_management_preview_advisor",
+        "package": "Microsoft.Azure.Management.Preview.Advisor", 
+        "name": "Microsoft.Azure.Management.Preview.Advisor", 
+        "url": [ 
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/advisor/resource-manager/Microsoft.Advisor/preview/2016-07-12-preview/advisor.json"
+         ]
+    },
+    { 
+        "app_name": "ex_microsoft_azure_management_advisor",
+        "package": "Microsoft.Azure.Management.Advisor", 
+        "name": "Microsoft.Azure.Management.Advisor", 
+        "url": [ 
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/advisor/resource-manager/Microsoft.Advisor/stable/2017-04-19/advisor.json"
+         ]
+    },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    { 
         "app_name": "ex_microsoft_azure_management_authorization",
         "package": "Microsoft.Azure.Management.Authorization", 
         "name": "Microsoft.Azure.Management.Authorization", 
