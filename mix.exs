@@ -28,7 +28,7 @@ defmodule ExMicrosoftAzureManagementGenerator.MixProject do
 
   defp package() do
     [
-      files: ["lib", "priv", "mix.exs", "README*", "readme*", "LICENSE*", "license*"],
+      files: ["lib", "mix.exs", "README*", "LICENSE*", "swagger.json", "generate.*"],
       maintainers: ["Christian Geuer-Pollmann"],
       licenses: ["Apache 2.0"],
       links: %{"GitHub" => @source_url}
@@ -37,7 +37,8 @@ defmodule ExMicrosoftAzureManagementGenerator.MixProject do
 
   defp deps do
     [
-      {:poison, ">= 1.0.0"}
+      {:poison, ">= 1.0.0"},
+      {:ex_doc, ">= 0.0.0", only: :dev}
     ]
   end
 end

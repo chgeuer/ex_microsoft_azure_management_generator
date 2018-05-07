@@ -3,13 +3,25 @@ defmodule Generator do
     defstruct [:app_name, :package, :name, :url]
   end
 
+  @moduledoc """
+  Generates Elixir SDKs from Microsoft Azure Swagger specifications.
+  """
+
   @codegen_version "2.3.1"
   @jar "swagger-codegen-cli-#{@codegen_version}.jar"
-  @jar_source "http://central.maven.org/maven2/io/swagger/swagger-codegen-cli/#{@codegen_version}/swagger-codegen-cli-#{
-                @codegen_version
-              }.jar"
+  @jar_source "http://central.maven.org/maven2/io/swagger/swagger-codegen-cli/#{@codegen_version}/swagger-codegen-cli-#{@codegen_version}.jar"
   @target "clients"
 
+  @doc """
+  Reads `configFile` JSON and creates the client SDK.
+
+  Returns `:ok`.
+
+  ## Examples
+
+      iex> Generator.generate("swagger.json")
+      :ok
+  """
   def generate(configFile \\ "swagger.json") do
     init()
 
@@ -17,6 +29,8 @@ defmodule Generator do
     |> File.read!()
     |> Poison.decode!(as: [%API{}])
     |> Enum.each(&gen_api_collection/1)
+
+    :ok
   end
 
   defp gen_api_collection(api = %API{}) do
@@ -111,7 +125,7 @@ defmodule Generator do
     do:
       x
       |> regex_pipe(
-        #|> deserialize(:"parameters", :struct, Microsoft.Azure.Management.Resources.Model.Object, options)
+        # |> deserialize(:"parameters", :struct, Microsoft.Azure.Management.Resources.Model.Object, options)
         ~r/(\|> deserialize\(:"[^"]+", :struct, .+?\.Model.Object, options)/,
         ~s/#\\1/,
         global: true
