@@ -111,8 +111,9 @@ defmodule Generator do
     do:
       x
       |> regex_pipe(
-        ~r/\|> deserialize\(:"outputs", :struct, .+?\.Model.Object, /,
-        ~s/|> deserialize(:outputs, :struct, %{}, /,
+        #|> deserialize(:"parameters", :struct, Microsoft.Azure.Management.Resources.Model.Object, options)
+        ~r/(\|> deserialize\(:"[^"]+", :struct, .+?\.Model.Object, options)/,
+        ~s/#\\1/,
         global: true
       )
 end
