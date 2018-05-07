@@ -23,21 +23,6 @@
             "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/advisor/resource-manager/Microsoft.Advisor/stable/2017-04-19/advisor.json"
          ]
     },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     { 
         "app_name": "ex_microsoft_azure_management_authorization",
         "package": "Microsoft.Azure.Management.Authorization", 
@@ -58,6 +43,28 @@
             "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/compute/resource-manager/Microsoft.Compute/stable/2017-12-01/compute.json",
             "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/compute/resource-manager/Microsoft.Compute/stable/2017-12-01/runCommands.json",
             "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/compute/resource-manager/Microsoft.Compute/stable/2018-04-01/disk.json"
+         ]
+    },
+
+    { 
+        "app_name": "ex_microsoft_azure_management_preview_containers",
+        "package": "Microsoft.Azure.Management.Preview.Containers", 
+        "name": "Microsoft.Azure.Management.Preview.Containers", 
+        "url": [
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/containerinstance/resource-manager/Microsoft.ContainerInstance/preview/2018-02-01-preview/containerInstance.json",
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/containerregistry/resource-manager/Microsoft.ContainerRegistry/preview/2018-02-01-preview/containerregistry_build.json"
+         ]
+    },
+    { 
+        "app_name": "ex_microsoft_azure_management_container",
+        "package": "Microsoft.Azure.Management.Containers", 
+        "name": "Microsoft.Azure.Management.Containers", 
+        "url": [
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/containerinstance/resource-manager/Microsoft.ContainerInstance/stable/2018-04-01/containerInstance.json",
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/containerregistry/resource-manager/Microsoft.ContainerRegistry/stable/2017-10-01/containerregistry.json",
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/containerservices/resource-manager/Microsoft.ContainerService/stable/2017-08-31/managedClusters.json",
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/containerservices/resource-manager/Microsoft.ContainerService/stable/2017-09-30/location.json",
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/containerservices/resource-manager/Microsoft.ContainerService/stable/2017-07-01/containerService.json"
          ]
     },
     { 
