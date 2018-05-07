@@ -5,7 +5,9 @@ defmodule Generator do
 
   @codegen_version "2.3.1"
   @jar "swagger-codegen-cli-#{@codegen_version}.jar"
-  @jar_source "http://central.maven.org/maven2/io/swagger/swagger-codegen-cli/#{@codegen_version}/swagger-codegen-cli-#{@codegen_version}.jar"
+  @jar_source "http://central.maven.org/maven2/io/swagger/swagger-codegen-cli/#{@codegen_version}/swagger-codegen-cli-#{
+                @codegen_version
+              }.jar"
   @target "clients"
 
   def generate(configFile \\ "swagger.json") do
@@ -74,21 +76,43 @@ defmodule Generator do
   end
 
   defp fix_swagger_problem(target) do
-    # https://github.com/swagger-api/swagger-codegen/issues/8138
-    # /usr/bin/find clients -type f -name "*.ex" -exec sed -i'' -e 's/add_param(:body, :"[^"]*", /add_param(:body, :body, /g' {} +
+    fix_files("#{target}/**/api/*.ex", &fix_api/1)
+    fix_files("#{target}/**/model/*.ex", &fix_model/1)
+  end
 
-    fix = fn body ->
-      Regex.replace(
+  defp fix_files(wildcard, fixes) do
+    wildcard
+    |> Path.wildcard()
+    |> Enum.each(fn filename ->
+      content =
+        filename
+        |> File.read!()
+        |> fixes.()
+
+      File.write!(filename, content)
+    end)
+  end
+
+  defp regex_pipe(body, regex, replacement, opts),
+    do: Regex.replace(regex, body, replacement, opts)
+
+  # https://github.com/swagger-api/swagger-codegen/issues/8138
+  # /usr/bin/find clients -type f -name "*.ex" -exec sed -i'' -e 's/add_param(:body, :"[^"]*", /add_param(:body, :body, /g' {} +
+  defp fix_api(x),
+    do:
+      x
+      |> regex_pipe(
         ~r/\|> add_param\(:body, :"[^"]+", /,
-        body,
-        "|> add_param(:body, :body, ",
+        ~s/|> add_param(:body, :body, /,
         global: true
       )
-    end
 
-    "#{target}/**/api/*.ex"
-    |> Path.wildcard()
-    |> Enum.map(&%{name: &1, content: &1 |> File.read!() |> fix.()})
-    |> Enum.each(&File.write!(&1.name, &1.content))
-  end
+  defp fix_model(x),
+    do:
+      x
+      |> regex_pipe(
+        ~r/\|> deserialize\(:"outputs", :struct, .+?\.Model.Object, /,
+        ~s/|> deserialize(:outputs, :struct, %{}, /,
+        global: true
+      )
 end
