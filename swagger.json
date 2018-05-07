@@ -161,6 +161,14 @@
          ]
     },
     { 
+        "app_name": "ex_microsoft_azure_management_eventgrid",
+        "package": "Microsoft.Azure.Management.EventGrid", 
+        "name": "Microsoft.Azure.Management.EventGrid", 
+        "url": [ 
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/eventgrid/resource-manager/Microsoft.EventGrid/stable/2018-01-01/EventGrid.json"
+         ]
+    },
+    { 
         "app_name": "ex_microsoft_azure_management_eventhub",
         "package": "Microsoft.Azure.Management.EventHub", 
         "name": "Microsoft.Azure.Management.EventHub", 
