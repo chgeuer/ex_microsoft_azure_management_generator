@@ -61,8 +61,16 @@ defmodule Generator do
     configFileName |> write_local_config_file(api.app_name, api.name)
 
     args =
-      "-jar #{@jar} generate -l elixir " <>
-        "-i #{api.url} -o #{@target}/#{api.package} -c #{configFileName}"
+      "-jar #{@jar} generate " <>
+      # # "C:\Program Files\Java\jre1.8.0_171\bin\keytool.exe" -import -file C:\Users\chgeuer\Desktop\FiddlerRoot.cer -keystore FiddlerKeystore -alias Fiddler
+      # "-Dhttp.proxyHost=127.0.0.1 -Dhttp.proxyPort=8888 " <>
+      # "-Dhttps.proxyHost=127.0.0.1 -Dhttps.proxyPort=8888 " <>
+      # "-Djavax.net.ssl.trustStore=FiddlerKeystore " <>
+      # "-Djavax.net.ssl.trustStorePassword=test123 " <>
+      "-l elixir " <>
+      "-i #{api.url} -o #{@target}/#{api.package} -c #{configFileName}"
+
+        IO.puts(args)
 
     {_stdout, 0} =
       System.cmd(
