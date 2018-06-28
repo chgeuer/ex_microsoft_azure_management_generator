@@ -51,8 +51,10 @@ defmodule Generator do
 
   defp generate_impl(api = %API{}) do
     api.url
+    |> IO.inspect()
     |> String.replace_leading(
-      "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/",
+      #"https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/",
+      "https://raw.githubusercontent.com/chgeuer/azure-rest-api-specs/master/specification/",
       ""
     )
     |> IO.puts()
