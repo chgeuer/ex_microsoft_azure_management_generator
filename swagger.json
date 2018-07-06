@@ -17,6 +17,14 @@
          ]
     },
     { 
+        "app_name": "ex_microsoft_azure_management_preview_botservice",
+        "package": "Microsoft.Azure.Management.Preview.BotService", 
+        "name": "Microsoft.Azure.Management.Preview.BotService", 
+        "url": [ 
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/botservice/resource-manager/Microsoft.BotService/preview/2017-12-01/botservice.json"
+         ]
+    },
+    { 
         "app_name": "ex_microsoft_azure_management_preview_advisor",
         "package": "Microsoft.Azure.Management.Preview.Advisor", 
         "name": "Microsoft.Azure.Management.Preview.Advisor", 
@@ -190,7 +198,7 @@
         "package": "Microsoft.Azure.Management.Preview.EventHub", 
         "name": "Microsoft.Azure.Management.Preview.EventHub", 
         "url": [ 
-            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/eventhub/resource-manager/Microsoft.EventHub/preview/2018-01-01-preview/EventHubCluster.json"
+            "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/eventhub/resource-manager/Microsoft.EventHub/preview/2018-01-01-preview/EventHub-preview.json"
          ]
     }
 ]

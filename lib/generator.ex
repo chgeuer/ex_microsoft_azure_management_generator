@@ -86,7 +86,7 @@ defmodule Generator do
     "#{@target}/#{api.package}"
     |> fix_swagger_problem()
 
-    #configFileName |> File.rm!()
+    configFileName |> File.rm!()
   end
 
   defp init() do
