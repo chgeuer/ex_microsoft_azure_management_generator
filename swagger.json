@@ -1,5 +1,14 @@
 [
     { 
+        "app_name": "ex_microsoft_azure_management_storage",
+        "package": "Microsoft.Azure.Management.Storage", 
+        "name": "Microsoft.Azure.Management.Storage", 
+        "url": [ 
+            "https://raw.githubusercontent.com/chgeuer/azure-rest-api-specs/master/specification/storage/resource-manager/Microsoft.Storage/stable/2018-02-01/storage.json",
+            "https://raw.githubusercontent.com/chgeuer/azure-rest-api-specs/master/specification/storage/resource-manager/Microsoft.Storage/stable/2018-02-01/blob.json"
+         ]
+    },
+    { 
         "app_name": "ex_microsoft_azure_management_preview_addons",
         "package": "Microsoft.Azure.Management.Preview.Addons", 
         "name": "Microsoft.Azure.Management.Preview.Addons", 

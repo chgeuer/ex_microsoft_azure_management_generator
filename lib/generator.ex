@@ -7,7 +7,8 @@ defmodule Generator do
   Generates Elixir SDKs from Microsoft Azure Swagger specifications.
   """
 
-  @codegen_version "2.3.1"
+  #@codegen_version "2.3.1"
+  @codegen_version "custom"
   @jar "swagger-codegen-cli-#{@codegen_version}.jar"
   @jar_source "http://central.maven.org/maven2/io/swagger/swagger-codegen-cli/#{@codegen_version}/swagger-codegen-cli-#{@codegen_version}.jar"
   @target "clients"
@@ -85,7 +86,7 @@ defmodule Generator do
     "#{@target}/#{api.package}"
     |> fix_swagger_problem()
 
-    configFileName |> File.rm!()
+    #configFileName |> File.rm!()
   end
 
   defp init() do
