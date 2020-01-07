@@ -7,10 +7,12 @@ defmodule Generator do
   Generates Elixir SDKs from Microsoft Azure Swagger specifications.
   """
 
-  #@codegen_version "2.3.1"
+  # @codegen_version "2.3.1"
   @codegen_version "custom"
   @jar "swagger-codegen-cli-#{@codegen_version}.jar"
-  @jar_source "http://central.maven.org/maven2/io/swagger/swagger-codegen-cli/#{@codegen_version}/swagger-codegen-cli-#{@codegen_version}.jar"
+  @jar_source "http://central.maven.org/maven2/io/swagger/swagger-codegen-cli/#{@codegen_version}/swagger-codegen-cli-#{
+                @codegen_version
+              }.jar"
   @target "clients"
 
   @doc """
@@ -54,7 +56,7 @@ defmodule Generator do
     api.url
     |> IO.inspect()
     |> String.replace_leading(
-      #"https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/",
+      # "https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/",
       "https://raw.githubusercontent.com/chgeuer/azure-rest-api-specs/master/specification/",
       ""
     )
@@ -63,17 +65,16 @@ defmodule Generator do
     configFileName = "#{api.name}.json"
     configFileName |> write_local_config_file(api.app_name, api.name)
 
+    # # "C:\Program Files\Java\jre1.8.0_171\bin\keytool.exe" -import -file C:\Users\chgeuer\Desktop\FiddlerRoot.cer -keystore FiddlerKeystore -alias Fiddler
+    # "-Dhttp.proxyHost=127.0.0.1 -Dhttp.proxyPort=8888 " <>
+    # "-Dhttps.proxyHost=127.0.0.1 -Dhttps.proxyPort=8888 " <>
+    # "-Djavax.net.ssl.trustStore=FiddlerKeystore " <>
+    # "-Djavax.net.ssl.trustStorePassword=test123 " <>
     args =
       "-jar #{@jar} generate " <>
-      # # "C:\Program Files\Java\jre1.8.0_171\bin\keytool.exe" -import -file C:\Users\chgeuer\Desktop\FiddlerRoot.cer -keystore FiddlerKeystore -alias Fiddler
-      # "-Dhttp.proxyHost=127.0.0.1 -Dhttp.proxyPort=8888 " <>
-      # "-Dhttps.proxyHost=127.0.0.1 -Dhttps.proxyPort=8888 " <>
-      # "-Djavax.net.ssl.trustStore=FiddlerKeystore " <>
-      # "-Djavax.net.ssl.trustStorePassword=test123 " <>
-      "-l elixir " <>
-      "-i #{api.url} -o #{@target}/#{api.package} -c #{configFileName}"
+        "-l elixir " <> "-i #{api.url} -o #{@target}/#{api.package} -c #{configFileName}"
 
-        IO.puts(args)
+    IO.puts(args)
 
     {_stdout, 0} =
       System.cmd(

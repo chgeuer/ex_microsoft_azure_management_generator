@@ -52,3 +52,11 @@ The compute SDK joins multiple Swagger definitions (`skus`, `compute`, `runComma
     ...
 ]
 ```
+
+# notes
+
+```cmd
+REM https://openapi-generator.tech/docs/customization
+
+java -jar C:\github\openapitools\openapi-generator\modules\openapi-generator-cli\target\openapi-generator-cli.jar help generate
+```
